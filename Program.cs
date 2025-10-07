@@ -10,14 +10,24 @@ namespace c_lernen
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Gebe deinen Vornamen ein: ");
+            Console.Write("Gebe deinen Vornamen ein: ");
             string firstName = Console.ReadLine();
 
-            Console.WriteLine("Gebe deinen Nachnamen ein: ");
+            Console.Write("Gebe deinen Nachnamen ein: ");
             string lastName = Console.ReadLine();
 
-            Console.WriteLine("Gebe dein Alter ein: ");
+            Console.Write("Gebe dein Alter ein: ");
             byte age = Convert.ToByte(Console.ReadLine());
+
+            Console.WriteLine("Vorname: " + firstName);
+            Console.WriteLine("Nachname: " + lastName);
+            Console.WriteLine("Alter: " + age);
+
+            Console.WriteLine("Hallo " + firstName + " " + lastName + "! Willkommen zurück!");
+            Console.WriteLine("Hallo {0} {1}! Willkommen zurück!", firstName, lastName);
+            Console.WriteLine($"Hallo {firstName} {lastName}! Willkommen zurück!");
+
+            Console.ReadKey();
         }
     }
 }
