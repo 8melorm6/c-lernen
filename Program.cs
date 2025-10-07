@@ -6,25 +6,27 @@ using System.Threading.Tasks;
 
 namespace c_lernen
 {
+
     internal class Program
     {
-        static void Main(string[] args)
+
+        static void SayHello(string name)
         {
-            Console.Write("Gebe Zahl1 ein: ");
-            double number1 = Convert.ToDouble(Console.ReadLine());
-
-            Console.Write("Gebe Zahl2 ein: ");
-            double number2 = Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine();
-
-            Console.WriteLine("{0} + {1} = {2}", number1, number2, number1 + number2);
-            Console.WriteLine("{0} - {1} = {2}", number1, number2, number1 - number2);
-            Console.WriteLine("{0} * {1} = {2}", number1, number2, number1 * number2);
-            Console.WriteLine("{0} / {1} = {2}", number1, number2, number1 / number2);
-            Console.WriteLine("{0} % {1} = {2}", number1, number2, number1 % number2);
-
-            Console.ReadKey();
+            Console.WriteLine("Hello " + name);
+            Console.WriteLine("Wie gehts?");
         }
+
+        static void Main()
+        {
+            SayHello("Michi");
+            SayHello("Mich");
+            SayHello("Mic");
+            SayHello("Mi");
+            SayHello("M");
+            SayHello("");
+
+            Console.ReadLine();
+        }
+
     }
 }
