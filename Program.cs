@@ -10,22 +10,19 @@ namespace c_lernen
     {
         static void Main(string[] args)
         {
-            Console.Write("Gebe deinen Vornamen ein: ");
-            string firstName = Console.ReadLine();
+            Console.Write("Gebe Zahl1 ein: ");
+            double number1 = Convert.ToDouble(Console.ReadLine());
 
-            Console.Write("Gebe deinen Nachnamen ein: ");
-            string lastName = Console.ReadLine();
+            Console.Write("Gebe Zahl2 ein: ");
+            double number2 = Convert.ToDouble(Console.ReadLine());
 
-            Console.Write("Gebe dein Alter ein: ");
-            byte age = Convert.ToByte(Console.ReadLine());
+            Console.WriteLine();
 
-            Console.WriteLine("Vorname: " + firstName);
-            Console.WriteLine("Nachname: " + lastName);
-            Console.WriteLine("Alter: " + age);
-
-            Console.WriteLine("Hallo " + firstName + " " + lastName + "! Willkommen zurück!");
-            Console.WriteLine("Hallo {0} {1}! Willkommen zurück!", firstName, lastName);
-            Console.WriteLine($"Hallo {firstName} {lastName}! Willkommen zurück!");
+            Console.WriteLine("{0} + {1} = {2}", number1, number2, number1 + number2);
+            Console.WriteLine("{0} - {1} = {2}", number1, number2, number1 - number2);
+            Console.WriteLine("{0} * {1} = {2}", number1, number2, number1 * number2);
+            Console.WriteLine("{0} / {1} = {2}", number1, number2, number1 / number2);
+            Console.WriteLine("{0} % {1} = {2}", number1, number2, number1 % number2);
 
             Console.ReadKey();
         }
