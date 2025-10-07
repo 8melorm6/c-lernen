@@ -7,15 +7,15 @@ namespace c_lernen
     {
         static void Main(string[] args)
         {
-            int zahl = Addition(10, 5);
-            Console.WriteLine(zahl);
-            Console.ReadKey();
+            string firstName = GetTextInput("Geben Sie Ihren Vornamen ein: ");
+            string lastName = GetTextInput("Geben Sie Ihren Nachnamen ein: ");
+            Console.WriteLine($"Hallo, {firstName} {lastName}!");
         }
 
-        static int Addition(int number1, int number2)
+        static string GetTextInput(string message)
         {
-            int ergebnis = number1 + number2;
-            return ergebnis;
+            Console.Write(message);
+            return Console.ReadLine();
         }
 
     }
