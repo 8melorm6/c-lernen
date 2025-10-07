@@ -9,23 +9,17 @@ namespace c_lernen
 
     internal class Program
     {
-
-        static void SayHello(string name)
+        static void Main(string[] args)
         {
-            Console.WriteLine("Hello " + name);
-            Console.WriteLine("Wie gehts?");
+            SayHello("Max", 25);
+            SayHello("Anna", 30);
+
+            Console.ReadKey();
         }
 
-        static void Main()
+        static void SayHello(string name, int age)
         {
-            SayHello("Michi");
-            SayHello("Mich");
-            SayHello("Mic");
-            SayHello("Mi");
-            SayHello("M");
-            SayHello("");
-
-            Console.ReadLine();
+            Console.WriteLine("Hallo {0}, du bist {1} Jahre alt!", name, age);
         }
 
     }
