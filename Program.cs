@@ -1,25 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace c_lernen
 {
 
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
-            SayHello("Max", 25);
-            SayHello("Anna", 30);
-
+            int zahl = Addition(10, 5);
+            Console.WriteLine(zahl);
             Console.ReadKey();
         }
 
-        static void SayHello(string name, int age)
+        static int Addition(int number1, int number2)
         {
-            Console.WriteLine("Hallo {0}, du bist {1} Jahre alt!", name, age);
+            int ergebnis = number1 + number2;
+            return ergebnis;
         }
 
     }
