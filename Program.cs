@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Eventing.Reader;
 
 namespace c_lernen
 {
@@ -6,35 +7,110 @@ namespace c_lernen
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Wie heißt du?");
-            string name = Console.ReadLine();
 
-            int alter; // außerhalb deklarieren, damit nach dem if nutzbar
-            while (true)
+            // Weitermachen oder Programm beenden?
+            string weitermachen = "ja";
+
+            while (weitermachen.ToLower() != "x")
             {
-                Console.WriteLine("Wie alt bist du?");
-                string eingabe = Console.ReadLine();
 
-                // Eingabe prüfen
-                if (int.TryParse(eingabe, out alter))
+                // Eingabe 1
+                Console.WriteLine("Erste Zahl:");
+                string eingabe1 = Console.ReadLine();
+
+                double zahl1 = 0;
+                while (!double.TryParse(eingabe1, out zahl1))
                 {
-                    break; // gültige Zahl → Schleife beenden
+                    Console.WriteLine("Ungültige Eingabe. Bitte Zahl eingeben:");
+                    eingabe1 = Console.ReadLine();
+                }
+
+                // Eingabe 2
+                Console.WriteLine("Zweite Zahl:");
+                string eingabe2 = Console.ReadLine();
+
+                double zahl2 = 0;
+                while (!double.TryParse(eingabe2, out zahl2))
+                {
+                    Console.WriteLine("Ungültige Eingabe. Bitte Zahl eingeben:");
+                    eingabe2 = Console.ReadLine();
+                }
+
+                // Operator
+                Console.WriteLine("Rechenart (+, -, *, /):");
+                string op = Console.ReadLine();
+
+                double ergebnis = 0;
+
+                /*
+                // Berechnung mit if-else
+                if (op == "+")
+                {
+                    ergebnis = zahl1 + zahl2;
+                }
+                else if (op == "-")
+                {
+                    ergebnis = zahl1 - zahl2;
+                }
+                else if (op == "*")
+                {
+                    ergebnis = zahl1 * zahl2;
+                }
+                else if (op == "/")
+                {
+                    if (zahl2 == 0)
+                    {
+                        Console.WriteLine("Division durch Null ist nicht erlaubt.");
+                        continue;
+                    }
+                    ergebnis = zahl1 / zahl2;
                 }
                 else
                 {
-                    Console.WriteLine("Bitte gib eine gültige Zahl ein.\n");
+                    Console.WriteLine("Ungültiger Operator.");
+                    continue;
                 }
-            }
+                */
 
-            int zukunftsAlter = alter + 10;
+                // Berechnung mit switch
+                switch (op)
+                {
+                    case "+":
+                        ergebnis = zahl1 + zahl2;
+                        break;
 
-            // 3 Wege, String zu formatieren
-            Console.WriteLine("Hallo " + name + ", in 10 Jahren bist du " + zukunftsAlter + " Jahre alt."); // Konkatenation
-            Console.WriteLine("Hallo {0}, in 10 Jahren bist du {1} Jahre alt.", name, zukunftsAlter);       // Platzhalter
-            Console.WriteLine($"Hallo {name}, in 10 Jahren bist du {zukunftsAlter} Jahre alt.");            // Interpolation
+                    case "-":
+                        ergebnis = zahl1 - zahl2;
+                        break;
 
-            Console.WriteLine("\nProgrammende. Drücke eine Taste zum Beenden...");
-            Console.ReadKey();
+                    case "*":
+                        ergebnis = zahl1 * zahl2;
+                        break;
+
+                    case "/":
+                        if (zahl2 == 0)
+                        {
+                            Console.WriteLine("Division durch Null ist nicht erlaubt.");
+                            continue;
+                        }
+                        ergebnis = zahl1 / zahl2;
+                        break;
+
+                    default:
+                        Console.WriteLine("Ungültiger Operator.");
+                        continue;
+                }
+
+                // Ausgabe
+                Console.WriteLine($"\nErgebnis: {ergebnis}");
+
+                // Entscheidung: weiter oder beenden
+                Console.WriteLine("\nMöchtest du weiterrechnen? (beliebige Taste = ja, x = beenden)");
+                weitermachen = Console.ReadLine();
+                Console.Clear(); // Bildschirm leeren für sauberen Neustart
+
+            }     
+
         }
     }
 }
