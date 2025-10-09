@@ -1,127 +1,40 @@
 ﻿using System;
-using System.Collections.Generic; // Für die List<> benötigt
+using System.Text;
+using System.Threading;
 
-namespace c_lernen
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        Console.CursorVisible = false;
+        const int width = 80;
+        const int height = 20;
+        const double freq = 0.3;
+        const double speed = 0.2;
+        const int delay = 40; // kleinere Pause = flüssiger
+
+        var sb = new StringBuilder(width * height + height);
+
+        while (true)
         {
-            string weitermachen = "ja";
-            List<string> historie = new List<string>(); // speichert alle Rechnungen
-
-            while (weitermachen.ToLower() != "x")
+            for (int frame = 0; frame < 360; frame++)
             {
-                Console.WriteLine("\n========================================");
-                Console.WriteLine("Mini-Rechner");
-                Console.WriteLine("========================================\n");
-
-                // Erste Zahl
-                Console.WriteLine("--- Erste Zahl ---");
-                Console.Write("Eingabe (Komma als Dezimalzeichen, z. B. 3,14): ");
-                string eingabe1 = Console.ReadLine();
-                eingabe1 = eingabe1.Replace('.', ',');
-
-                double zahl1 = 0;
-                while (!double.TryParse(eingabe1, out zahl1))
+                sb.Clear();
+                for (int y = 0; y < height; y++)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Fehler: ungültige Eingabe!");
-                    Console.ResetColor();
-                    Console.Write("Bitte Zahl erneut eingeben: ");
-                    eingabe1 = Console.ReadLine();
-                    eingabe1 = eingabe1.Replace('.', ',');
+                    for (int x = 0; x < width; x++)
+                    {
+                        double value = Math.Sin((x * freq) + (frame * speed));
+                        int waveY = (int)((value + 1) * (height / 2.0));
+                        sb.Append(y == waveY ? '*' : ' ');
+                    }
+                    sb.AppendLine();
                 }
 
-                // Zweite Zahl
-                Console.WriteLine("\n--- Zweite Zahl ---");
-                Console.Write("Eingabe (Komma als Dezimalzeichen, z. B. 3,14): ");
-                string eingabe2 = Console.ReadLine();
-                eingabe2 = eingabe2.Replace('.', ',');
-
-                double zahl2 = 0;
-                while (!double.TryParse(eingabe2, out zahl2))
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Fehler: ungültige Eingabe!");
-                    Console.ResetColor();
-                    Console.Write("Bitte Zahl erneut eingeben: ");
-                    eingabe2 = Console.ReadLine();
-                    eingabe2 = eingabe2.Replace('.', ',');
-                }
-
-                // Operator
-                Console.WriteLine("\n--- Rechenart ---");
-                Console.Write("Wähle (+, -, *, /): ");
-                string op = Console.ReadLine();
-
-                double ergebnis = 0;
-
-                // Berechnung
-                switch (op)
-                {
-                    case "+":
-                        ergebnis = zahl1 + zahl2;
-                        break;
-
-                    case "-":
-                        ergebnis = zahl1 - zahl2;
-                        break;
-
-                    case "*":
-                        ergebnis = zahl1 * zahl2;
-                        break;
-
-                    case "/":
-                        if (zahl2 == 0)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Fehler: Division durch Null nicht erlaubt!");
-                            Console.ResetColor();
-                            continue;
-                        }
-                        ergebnis = zahl1 / zahl2;
-                        break;
-
-                    default:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Fehler: Ungültiger Operator!");
-                        Console.ResetColor();
-                        continue;
-                }
-
-                // Ausgabe
-                string rechnung = $"{zahl1} {op} {zahl2} = {ergebnis:F2}";
-                Console.WriteLine($"\nRechnung: {rechnung}");
-
-                // In Historie speichern
-                historie.Add(rechnung);
-
-                // Entscheidung: weiter oder beenden
-                Console.WriteLine("\nMöchtest du weiterrechnen? (beliebige Taste = ja, x = beenden)");
-                weitermachen = Console.ReadLine();
-                Console.Clear();
+                Console.SetCursorPosition(0, 0);
+                Console.Write(sb.ToString());
+                Thread.Sleep(delay);
             }
-
-            // Nach Programmende Historie anzeigen
-            Console.WriteLine("Programm beendet.\n");
-            Console.WriteLine("Berechnungen dieser Sitzung:");
-            Console.WriteLine("----------------------------------------");
-
-            if (historie.Count == 0)
-            {
-                Console.WriteLine("Keine Berechnungen durchgeführt.");
-            }
-            else
-            {
-                foreach (string eintrag in historie)
-                {
-                    Console.WriteLine(eintrag);
-                }
-            }
-
-            Console.WriteLine("\nDrücke eine Taste zum Schließen...");
-            Console.ReadKey();
         }
     }
 }
