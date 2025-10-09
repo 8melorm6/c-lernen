@@ -7,23 +7,20 @@ namespace c_lernen
     {
         static void Main(string[] args)
         {
-            int age = 14;
-            bool withParents = true;
+            int alter = 18;
+            bool mobil = false;
+            bool qualifiziert = true;
+            bool testBestanden = false;
+            bool schüchtern = false;
 
-            if (age >= 18)
+            if ((alter >= 18) && (mobil == true) && (qualifiziert == true || testBestanden == true) && schüchtern == false) 
             {
-                Console.WriteLine("Du darfst den Film sehen.");
-            }
-            else if (withParents == true)
-            {
-                Console.WriteLine("Du darfst den Film dank deiner Eltern sehen.");
+                Console.WriteLine("Du bekommst den Job!");
             }
             else
             {
-                Console.WriteLine("Du darfst den Film nicht sehen.");
+                Console.WriteLine("Leider kein Job!");
             }
-
-            Console.ReadKey();
         }
     }
 }
