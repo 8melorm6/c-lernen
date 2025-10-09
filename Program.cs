@@ -6,44 +6,35 @@ namespace c_lernen
     {
         static void Main(string[] args)
         {
-            Console.Write("Gebe dein Gewicht in kg ein: ");
-            double weight = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Wie heißt du?");
+            string name = Console.ReadLine();
 
-            Console.Write("Gebe deine Größe in m ein: ");
-            double height = Convert.ToDouble(Console.ReadLine()); 
+            int alter; // außerhalb deklarieren, damit nach dem if nutzbar
+            while (true)
+            {
+                Console.WriteLine("Wie alt bist du?");
+                string eingabe = Console.ReadLine();
 
-            double bmi = weight / (height * height);
-            string classification = "";
-
-            if (bmi < 18.5)
-            {
-                classification = "Untergewicht";
-            }
-            else if (bmi >= 18.5 && bmi < 25)
-            {
-                classification = "Normalgewicht";
-            }
-            else if (bmi >= 25 && bmi < 30)
-            {
-                classification = "Übergewicht";
-            }
-            else if (bmi >= 30 && bmi < 35)
-            {
-                classification = "Adipositas Grad 1";
-            }
-            else if (bmi >= 35 && bmi < 40)
-            {
-                classification = "Adipositas Grad 2";
-            }
-            else if (bmi >= 40)
-            {
-                classification = "Adipositas Grad 3";
+                // Eingabe prüfen
+                if (int.TryParse(eingabe, out alter))
+                {
+                    break; // gültige Zahl → Schleife beenden
+                }
+                else
+                {
+                    Console.WriteLine("Bitte gib eine gültige Zahl ein.\n");
+                }
             }
 
-            Console.WriteLine();
-            Console.WriteLine("Dein BMI beträgt {0}, das ist {1}", bmi, classification);
+            int zukunftsAlter = alter + 10;
+
+            // 3 Wege, String zu formatieren
+            Console.WriteLine("Hallo " + name + ", in 10 Jahren bist du " + zukunftsAlter + " Jahre alt."); // Konkatenation
+            Console.WriteLine("Hallo {0}, in 10 Jahren bist du {1} Jahre alt.", name, zukunftsAlter);       // Platzhalter
+            Console.WriteLine($"Hallo {name}, in 10 Jahren bist du {zukunftsAlter} Jahre alt.");            // Interpolation
+
+            Console.WriteLine("\nProgrammende. Drücke eine Taste zum Beenden...");
             Console.ReadKey();
-
         }
     }
 }
