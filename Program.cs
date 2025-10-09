@@ -7,19 +7,31 @@ namespace c_lernen
     {
         static void Main(string[] args)
         {
-            int alter = 18;
-            bool mobil = false;
-            bool qualifiziert = true;
-            bool testBestanden = false;
-            bool schüchtern = false;
+            int day = 2;
 
-            if ((alter >= 18) && (mobil == true) && (qualifiziert == true || testBestanden == true) && schüchtern == false) 
+            switch (day)
             {
-                Console.WriteLine("Du bekommst den Job!");
-            }
-            else
-            {
-                Console.WriteLine("Leider kein Job!");
+                case 1:
+                    Console.WriteLine("Montag");
+                    break;
+                case 2:
+                    Console.WriteLine("Dienstag");
+                    break;
+                case 3:
+                    Console.WriteLine("Mittwoch");
+                    break;
+                case 4:
+                    Console.WriteLine("Donnerstag");
+                    break;
+                case 5:
+                    Console.WriteLine("Freitag");
+                    break;
+                case 6:
+                    Console.WriteLine("Samstag");
+                    break;
+                case 7:
+                    Console.WriteLine("Sonntag");
+                    break;
             }
         }
     }
