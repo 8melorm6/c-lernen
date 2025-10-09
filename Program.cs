@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Diagnostics.Eventing.Reader;
+using System.Collections.Generic; // Für die List<> benötigt
 
 namespace c_lernen
 {
@@ -7,72 +7,57 @@ namespace c_lernen
     {
         static void Main(string[] args)
         {
-
-            // Weitermachen oder Programm beenden?
             string weitermachen = "ja";
+            List<string> historie = new List<string>(); // speichert alle Rechnungen
 
             while (weitermachen.ToLower() != "x")
             {
+                Console.WriteLine("\n========================================");
+                Console.WriteLine("Mini-Rechner");
+                Console.WriteLine("========================================\n");
 
-                // Eingabe 1
-                Console.WriteLine("Erste Zahl:");
+                // Erste Zahl
+                Console.WriteLine("--- Erste Zahl ---");
+                Console.Write("Eingabe (Komma als Dezimalzeichen, z. B. 3,14): ");
                 string eingabe1 = Console.ReadLine();
+                eingabe1 = eingabe1.Replace('.', ',');
 
                 double zahl1 = 0;
                 while (!double.TryParse(eingabe1, out zahl1))
                 {
-                    Console.WriteLine("Ungültige Eingabe. Bitte Zahl eingeben:");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Fehler: ungültige Eingabe!");
+                    Console.ResetColor();
+                    Console.Write("Bitte Zahl erneut eingeben: ");
                     eingabe1 = Console.ReadLine();
+                    eingabe1 = eingabe1.Replace('.', ',');
                 }
 
-                // Eingabe 2
-                Console.WriteLine("Zweite Zahl:");
+                // Zweite Zahl
+                Console.WriteLine("\n--- Zweite Zahl ---");
+                Console.Write("Eingabe (Komma als Dezimalzeichen, z. B. 3,14): ");
                 string eingabe2 = Console.ReadLine();
+                eingabe2 = eingabe2.Replace('.', ',');
 
                 double zahl2 = 0;
                 while (!double.TryParse(eingabe2, out zahl2))
                 {
-                    Console.WriteLine("Ungültige Eingabe. Bitte Zahl eingeben:");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Fehler: ungültige Eingabe!");
+                    Console.ResetColor();
+                    Console.Write("Bitte Zahl erneut eingeben: ");
                     eingabe2 = Console.ReadLine();
+                    eingabe2 = eingabe2.Replace('.', ',');
                 }
 
                 // Operator
-                Console.WriteLine("Rechenart (+, -, *, /):");
+                Console.WriteLine("\n--- Rechenart ---");
+                Console.Write("Wähle (+, -, *, /): ");
                 string op = Console.ReadLine();
 
                 double ergebnis = 0;
 
-                /*
-                // Berechnung mit if-else
-                if (op == "+")
-                {
-                    ergebnis = zahl1 + zahl2;
-                }
-                else if (op == "-")
-                {
-                    ergebnis = zahl1 - zahl2;
-                }
-                else if (op == "*")
-                {
-                    ergebnis = zahl1 * zahl2;
-                }
-                else if (op == "/")
-                {
-                    if (zahl2 == 0)
-                    {
-                        Console.WriteLine("Division durch Null ist nicht erlaubt.");
-                        continue;
-                    }
-                    ergebnis = zahl1 / zahl2;
-                }
-                else
-                {
-                    Console.WriteLine("Ungültiger Operator.");
-                    continue;
-                }
-                */
-
-                // Berechnung mit switch
+                // Berechnung
                 switch (op)
                 {
                     case "+":
@@ -90,27 +75,53 @@ namespace c_lernen
                     case "/":
                         if (zahl2 == 0)
                         {
-                            Console.WriteLine("Division durch Null ist nicht erlaubt.");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Fehler: Division durch Null nicht erlaubt!");
+                            Console.ResetColor();
                             continue;
                         }
                         ergebnis = zahl1 / zahl2;
                         break;
 
                     default:
-                        Console.WriteLine("Ungültiger Operator.");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Fehler: Ungültiger Operator!");
+                        Console.ResetColor();
                         continue;
                 }
 
                 // Ausgabe
-                Console.WriteLine($"\nErgebnis: {ergebnis}");
+                string rechnung = $"{zahl1} {op} {zahl2} = {ergebnis:F2}";
+                Console.WriteLine($"\nRechnung: {rechnung}");
+
+                // In Historie speichern
+                historie.Add(rechnung);
 
                 // Entscheidung: weiter oder beenden
                 Console.WriteLine("\nMöchtest du weiterrechnen? (beliebige Taste = ja, x = beenden)");
                 weitermachen = Console.ReadLine();
-                Console.Clear(); // Bildschirm leeren für sauberen Neustart
+                Console.Clear();
+            }
 
-            }     
+            // Nach Programmende Historie anzeigen
+            Console.WriteLine("Programm beendet.\n");
+            Console.WriteLine("Berechnungen dieser Sitzung:");
+            Console.WriteLine("----------------------------------------");
 
+            if (historie.Count == 0)
+            {
+                Console.WriteLine("Keine Berechnungen durchgeführt.");
+            }
+            else
+            {
+                foreach (string eintrag in historie)
+                {
+                    Console.WriteLine(eintrag);
+                }
+            }
+
+            Console.WriteLine("\nDrücke eine Taste zum Schließen...");
+            Console.ReadKey();
         }
     }
 }
