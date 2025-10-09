@@ -7,16 +7,23 @@ namespace c_lernen
     {
         static void Main(string[] args)
         {
-            string firstName = GetTextInput("Geben Sie Ihren Vornamen ein: ");
-            string lastName = GetTextInput("Geben Sie Ihren Nachnamen ein: ");
-            Console.WriteLine($"Hallo, {firstName} {lastName}!");
-        }
+            int age = 14;
+            bool withParents = true;
 
-        static string GetTextInput(string message)
-        {
-            Console.Write(message);
-            return Console.ReadLine();
-        }
+            if (age >= 18)
+            {
+                Console.WriteLine("Du darfst den Film sehen.");
+            }
+            else if (withParents == true)
+            {
+                Console.WriteLine("Du darfst den Film dank deiner Eltern sehen.");
+            }
+            else
+            {
+                Console.WriteLine("Du darfst den Film nicht sehen.");
+            }
 
+            Console.ReadKey();
+        }
     }
 }
